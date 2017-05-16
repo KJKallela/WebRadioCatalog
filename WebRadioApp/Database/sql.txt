@@ -1,0 +1,23 @@
+CREATE TABLE category
+     (id int IDENTITY(1,1) PRIMARY KEY,
+     name VARCHAR(50) NOT NULL);
+ 
+CREATE TABLE country
+     (id int IDENTITY(1,1) PRIMARY KEY,
+     name VARCHAR(50) NOT NULL);
+
+CREATE TABLE radiostations
+     (id int IDENTITY(1,1) PRIMARY KEY,
+     name NVARCHAR(MAX) NOT NULL,
+     url NVARCHAR(MAX),
+     categoryId int,
+     countryId int,
+     modifiedby NVARCHAR(50),
+     modified_date DATETIME,
+     FOREIGN KEY (categoryId) REFERENCES category(id),
+     FOREIGN KEY (countryId) REFERENCES country(id)); 
+ 
+INSERT INTO [dbo].category ([name]) VALUES ('The test category');
+INSERT INTO [dbo].country  ([name]) VALUES ('The test country');
+INSERT INTO [dbo].radiostations  ([name],[url],[categoryId],[countryId],[modifiedby], [modified_date]) 
+	VALUES ('The test radio station', 'http//www.testurl.com', 1, 1, 'Administrator', '2017-05-15 12:00:00');
